@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub issues user icon",
+  "version": "0.1.0",
+  "content_scripts": [{
+    "matches": [ "https://github.com/*" ],
+    "js": [ "content_scripts.js" ]
+  }]
+}
