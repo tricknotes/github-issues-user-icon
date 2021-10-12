@@ -24,3 +24,14 @@ const insertAvatar = () => {
 }
 
 insertAvatar();
+
+const observer = new MutationObserver((_, o) => {
+  // Re-observe child content. It may be removed on parent content changed.
+  o.observe(document.querySelector('#repo-content-pjax-container'), { childList: true });
+  insertAvatar();
+});
+
+// On page change
+observer.observe(document.querySelector('#js-repo-pjax-container'), { childList: true });
+// On search query change
+observer.observe(document.querySelector('#repo-content-pjax-container'), { childList: true });
