@@ -5,6 +5,10 @@ const insertAvatar = () => {
       return;
     }
 
+    if (e.querySelector('.Label--secondary')?.textContent === 'bot') {
+      return;
+    }
+
     const userName = e.querySelector('a').textContent;
     const icon = document.createElement('a');
     const img = document.createElement('img');
