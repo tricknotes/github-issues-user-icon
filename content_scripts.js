@@ -30,6 +30,8 @@
 
   insertAvatar();
 
+  const $ = (...args) => document.querySelector(...args);
+
   const observer = new MutationObserver((_, o) => {
     // Re-observe child content. It may be removed on parent content changed.
     o.observe(document.querySelector('#repo-content-pjax-container'), { childList: true });
