@@ -34,12 +34,21 @@
 
   const observer = new MutationObserver((_, o) => {
     // Re-observe child content. It may be removed on parent content changed.
-    o.observe(document.querySelector('#repo-content-pjax-container'), { childList: true });
+    const element = $('#repo-content-pjax-container');
+    if (element) {
+      o.observe(element, { childList: true });
+    }
     insertAvatar();
   });
 
+  const parentContainer = $('#js-repo-pjax-container');
+  const childContainer = $('#repo-content-pjax-container');
   // On page change
-  observer.observe(document.querySelector('#js-repo-pjax-container'), { childList: true });
+  if (parentContainer) {
+    observer.observe(parentContainer, { childList: true });
+  }
   // On search query change
-  observer.observe(document.querySelector('#repo-content-pjax-container'), { childList: true });
+  if (childContainer) {
+    observer.observe(childContainer, { childList: true });
+  }
 })();
