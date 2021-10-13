@@ -1,7 +1,7 @@
 const insertAvatar = () => {
   [...document.querySelectorAll('.opened-by')].forEach((e) => {
     // Don't apply twice.
-    if (e.querySelector('.avatar-user')) {
+    if (e.parentElement.querySelector('.avatar-user')) {
       return;
     }
 
