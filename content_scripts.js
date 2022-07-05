@@ -41,8 +41,14 @@
     insertAvatar();
   });
 
+  const body = $('body');
   const parentContainer = $('#js-repo-pjax-container');
   const childContainer = $('#repo-content-pjax-container');
+
+  // On body change
+  if (body) {
+    observer.observe(body, { childList: true });
+  }
   // On page change
   if (parentContainer) {
     observer.observe(parentContainer, { childList: true });
