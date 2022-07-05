@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GitHub issues user icon",
   "description": "An extension to show author icon to GitHub's issues and pull requests pages.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "content_scripts": [{
     "matches": [ "https://github.com/*" ],
     "js": [ "content_scripts.js" ]
