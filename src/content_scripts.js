@@ -30,31 +30,20 @@
 
   insertAvatar();
 
-  const $ = (...args) => document.querySelector(...args);
-
-  const observer = new MutationObserver((_, o) => {
-    // Re-observe child content. It may be removed on parent content changed.
-    const element = $('#repo-content-pjax-container');
-    if (element) {
-      o.observe(element, { childList: true });
+  // GitHub replaces deeply nested containers (or the `body` itself) on navigation,
+  // so observing a specific container stops working once it is swapped out.
+  // Observe the document root with `subtree` instead, debouncing the callback
+  // since a single navigation causes many mutation records.
+  let timer = null;
+  const observer = new MutationObserver(() => {
+    if (timer) {
+      return;
     }
-    insertAvatar();
+    timer = setTimeout(() => {
+      timer = null;
+      insertAvatar();
+    }, 100);
   });
 
-  const body = $('body');
-  const parentContainer = $('#js-repo-pjax-container');
-  const childContainer = $('#repo-content-pjax-container');
-
-  // On body change
-  if (body) {
-    observer.observe(body, { childList: true });
-  }
-  // On page change
-  if (parentContainer) {
-    observer.observe(parentContainer, { childList: true });
-  }
-  // On search query change
-  if (childContainer) {
-    observer.observe(childContainer, { childList: true });
-  }
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
